@@ -4,6 +4,10 @@
  */
 package gameoflife;
 
+import java.awt.FlowLayout;
+import java.awt.Rectangle;
+import javax.swing.JScrollPane;
+
 /**
  *
  * @author Hendrik
@@ -15,6 +19,14 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+ //       setContentPane(new GameView());
+ GameView g =new GameView();
+  g.setBounds(new Rectangle(1000, 1000));
+     JScrollPane scroll = new JScrollPane(g);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //this.add(scroll);
+       setContentPane(scroll);
+
     }
 
     /**
