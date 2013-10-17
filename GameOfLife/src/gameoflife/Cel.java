@@ -52,21 +52,21 @@ public class Cel {
             Point p1 = new Point();
             Point p2;
             Point p3;
-                      if (y % 2 == 0) {
-               p1 = new Point((x * Controller.celWidth),
+            if (y % 2 == 0) {
+                p1 = new Point((x * Controller.celWidth),
                         (y * (Controller.celHeight)));
-               p2 = new Point((x + 1) * Controller.celWidth,
+                p2 = new Point((x + 1) * Controller.celWidth,
                         (y * (Controller.celHeight)));
-               p3 = new Point(((x * Controller.celWidth)),
+                p3 = new Point(((x * Controller.celWidth)),
                         ((y + 1) * (Controller.celHeight)));
             } else {
                 p1 = new Point(((x - 1) * Controller.celWidth),
                         ((y + 1) * Controller.celHeight) - (Controller.celHeight));
                 p2 = new Point((x) * Controller.celWidth,
                         (y * (Controller.celHeight) - (Controller.celHeight)));
-               p3 = new Point(((x * Controller.celWidth)),
-                       ((y + 1) * Controller.celHeight) - (Controller.celHeight));
-           }
+                p3 = new Point(((x * Controller.celWidth)),
+                        ((y + 1) * Controller.celHeight) - (Controller.celHeight));
+            }
 
 
 
@@ -76,7 +76,7 @@ public class Cel {
 
             int[] xcor = {p1.x, p2.x, p3.x};
 
-            int[] ycor = {p1.y-((y/2)*Controller.celHeight) , p2.y-((y/2)*Controller.celHeight), p3.y -((y/2)*Controller.celHeight)};
+            int[] ycor = {p1.y - ((y / 2) * Controller.celHeight), p2.y - ((y / 2) * Controller.celHeight), p3.y - ((y / 2) * Controller.celHeight)};
 
             Polygon triangle = new Polygon(xcor, ycor, xcor.length);
 
@@ -84,6 +84,49 @@ public class Cel {
             image.setColor(Color.BLACK);
             image.draw(triangle);
 
+
+
+        } else if (cellType == 2) {
+
+            Point p1 = new Point((x * Controller.celWidth) + (Controller.celWidth / 4), ((y - 1) * Controller.celHeight));
+
+            Point p2 = new Point(((x + 1) * Controller.celWidth) - (Controller.celWidth / 4), ((y - 1) * Controller.celHeight));
+
+            Point p3 = new Point(((x + 1) * Controller.celWidth)+ (Controller.celWidth / 4), ((y - 1) * Controller.celHeight) + (Controller.celHeight / 2));
+
+            Point p4 = new Point(((x + 1) * Controller.celWidth) - (Controller.celWidth / 4), ((y) * Controller.celHeight));
+
+            Point p5 = new Point(((x) * Controller.celWidth) + (Controller.celWidth / 4), ((y) * Controller.celHeight));
+
+            Point p6 = new Point(((x) * Controller.celWidth) - (Controller.celWidth / 4), ((y) * Controller.celHeight) - (Controller.celHeight / 2));
+            if (x % 2 != 0) {
+                /*  _
+                 * / \
+                 * \_/
+                 */
+
+                p1.y -= Controller.celHeight / 2;
+                p2.y -= Controller.celHeight / 2;
+                p3.y -= Controller.celHeight / 2;
+                p4.y -= Controller.celHeight / 2;
+                p5.y -= Controller.celHeight / 2;
+                p6.y -= Controller.celHeight / 2;
+
+
+
+
+            }
+            Polygon hexagon = new Polygon();
+            hexagon.addPoint(p1.x, p1.y);
+            hexagon.addPoint(p2.x, p2.y);
+            hexagon.addPoint(p3.x, p3.y);
+            hexagon.addPoint(p4.x, p4.y);
+            hexagon.addPoint(p5.x, p5.y);
+            hexagon.addPoint(p6.x, p6.y);
+            //hexagon.addPoint(p7.x, p7.y);
+            image.fill(hexagon);
+            image.setColor(Color.BLACK);
+            image.draw(hexagon);
 
 
         }
