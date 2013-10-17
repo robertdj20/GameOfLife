@@ -52,21 +52,22 @@ public class Cel {
             Point p1 = new Point();
             Point p2;
             Point p3;
-            if (y % 2 == 0) {
-                p1 = new Point((x * Controller.celWidth),
+                      if (y % 2 == 0) {
+               p1 = new Point((x * Controller.celWidth),
                         (y * (Controller.celHeight)));
-                p2 = new Point((x + 1) * Controller.celWidth,
+               p2 = new Point((x + 1) * Controller.celWidth,
                         (y * (Controller.celHeight)));
-                p3 = new Point(((x * Controller.celWidth)),
+               p3 = new Point(((x * Controller.celWidth)),
                         ((y + 1) * (Controller.celHeight)));
             } else {
                 p1 = new Point(((x - 1) * Controller.celWidth),
                         ((y + 1) * Controller.celHeight) - (Controller.celHeight));
                 p2 = new Point((x) * Controller.celWidth,
                         (y * (Controller.celHeight) - (Controller.celHeight)));
-                p3 = new Point(((x * Controller.celWidth)),
-                        ((y + 1) * Controller.celHeight) - (Controller.celHeight));
-            }
+               p3 = new Point(((x * Controller.celWidth)),
+                       ((y + 1) * Controller.celHeight) - (Controller.celHeight));
+           }
+
 
 
 
@@ -75,7 +76,7 @@ public class Cel {
 
             int[] xcor = {p1.x, p2.x, p3.x};
 
-            int[] ycor = {p1.y, p2.y, p3.y};
+            int[] ycor = {p1.y-((y/2)*Controller.celHeight) , p2.y-((y/2)*Controller.celHeight), p3.y -((y/2)*Controller.celHeight)};
 
             Polygon triangle = new Polygon(xcor, ycor, xcor.length);
 
