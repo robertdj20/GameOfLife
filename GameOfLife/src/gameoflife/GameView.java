@@ -28,7 +28,7 @@ public class GameView extends JPanel{
                       Color bgColor = Color.gray;
     public GameView()
     {
-        game = new HexagonGame();
+        game = new TriangleGame();
         game.CreateGame(100, 100);
         game.SetStatusCel(99, 99);
        this.setPreferredSize(new Dimension(100*Controller.celWidth, 100*Controller.celHeight));

@@ -67,8 +67,9 @@ public class Cel {
             Point p1 = new Point();
             Point p2;
             Point p3;
-            int letterY= (y * Controller.celHeight);
             int letterX= (x * Controller.celWidth);
+            int letterY= (y * Controller.celHeight)- ((y / 2) * Controller.celHeight) +(Controller.celHeight/2);
+
             if (y % 2 == 0) {
                 p1 = new Point((x * Controller.celWidth),
                         (y * (Controller.celHeight)));
@@ -76,6 +77,8 @@ public class Cel {
                         (y * (Controller.celHeight)));
                 p3 = new Point(((x * Controller.celWidth)),
                         ((y + 1) * (Controller.celHeight)));
+                letterX +=Controller.celWidth/4;
+         
             } else {
                 p1 = new Point(((x - 1) * Controller.celWidth),
                         ((y + 1) * Controller.celHeight) - (Controller.celHeight));
@@ -83,12 +86,14 @@ public class Cel {
                         (y * (Controller.celHeight) - (Controller.celHeight)));
                 p3 = new Point(((x * Controller.celWidth)),
                         ((y + 1) * Controller.celHeight) - (Controller.celHeight));
+               letterX -=Controller.celWidth/2;
+                letterY -=Controller.celHeight - (Controller.celHeight/2.5f);
             }
 
 
 
 
-
+          
 
 
             int[] xcor = {p1.x, p2.x, p3.x};
@@ -100,7 +105,7 @@ public class Cel {
             image.fill(triangle);
             image.setColor(Color.BLACK);
             image.draw(triangle);
-
+             image.drawString(Integer.toString(generation), letterX, letterY);
 
 
         } else if (cellType == 2) {
