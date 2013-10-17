@@ -41,6 +41,6 @@ public class IGame {
     }
 
     void SetStatusCel(int X, int Y) {
-        Cellen[X][Y].ChangeStatusCel();
+        Cellen[X][Y].SetCelStatus(true);
     }
 }
