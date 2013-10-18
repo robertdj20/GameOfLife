@@ -26,13 +26,30 @@ public class GameView extends JPanel{
     IGame game ;
                   BufferedImage grid;   
                       Color bgColor = Color.gray;
-    public GameView()
+    public GameView(Controller c)
     {
-        game = new TriangleGame();
-        game.CreateGame(100, 100);
-        game.SetStatusCel(99, 99);
+        controller =c;
+        game = c.GetGame();
        this.setPreferredSize(new Dimension(100*Controller.celWidth, 100*Controller.celHeight));
-
+this.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                  controller.GebruikerClicked(evt.getPoint().x,evt.getPoint().y);
+              //    game = controller.GetGame();
+                  repaint();
+                }
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    System.out.println("mouseEntered");
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    System.out.println("mouseExited");
+                }
+                public void mousePressed(java.awt.event.MouseEvent evt) {
+                    System.out.println("mousePressed");
+                }
+                public void mouseReleased(java.awt.event.MouseEvent evt) {
+                    System.out.println("mouseReleased");
+                }
+            });
     }
     
     

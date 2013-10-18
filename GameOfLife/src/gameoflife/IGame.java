@@ -5,16 +5,19 @@
 package gameoflife;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Hendrik
  */
-public class IGame {
+public abstract class IGame {
 
     Cel Cellen[][];
    int Width ,Height;
         protected int celType;
+        public abstract List<Cel> GetBuren(int x, int y);
     public void CreateGame(int width, int height) {
         this.Width = width;
         this.Height = height;
@@ -43,4 +46,11 @@ public class IGame {
     void SetStatusCel(int X, int Y) {
         Cellen[X][Y].SetCelStatus(true);
     }
+
+   abstract void GebruikerClicked(int x, int y);
+
+   abstract void DoeBeurt();
+      
+
+
 }

@@ -5,8 +5,15 @@
 package gameoflife;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -14,18 +21,54 @@ import javax.swing.JScrollPane;
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    Controller controller;
+GameView g ;
+   Timer t;
+    JButton startBtn;
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
- //       setContentPane(new GameView());
- GameView g =new GameView();
-  g.setBounds(new Rectangle(1000, 1000));
-     JScrollPane scroll = new JScrollPane(g);
+        controller = new Controller();
+        controller.newGame(100, 100, new RectangleGame());
+        //       setContentPane(new GameView());
+         g = new GameView(controller);
+        JScrollPane scroll = new JScrollPane(g);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         //this.add(scroll);
-       setContentPane(scroll);
+        JPanel mainPanel = new JPanel(new FlowLayout());
+
+       t = new Timer(2000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        controller.DoeBeurt();
+                        g.repaint();
+                    }
+                });
+        
+        JPanel topBar = new JPanel();
+         startBtn = new JButton("Start");
+        startBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+          if(!t.isRunning())
+          {
+                           t.start();
+                           startBtn.setText("Stop");
+          }
+          else
+          {
+              t.stop();
+                  startBtn.setText("Start");
+          }
+            }
+        });
+        topBar.add(startBtn);
+        mainPanel.add(topBar);
+        mainPanel.add(scroll);
+        setContentPane(mainPanel);
+        setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
     }
 

@@ -18,7 +18,7 @@ import java.awt.geom.Rectangle2D;
 public class Cel {
 
     int generation = 0;
-
+    boolean LastStatus =false;
     public Cel() {
         IsAlive = false;
     }
@@ -27,10 +27,15 @@ public class Cel {
     final Color live = Color.GREEN;
 
     public void SetCelStatus(boolean status) {
+        LastStatus = IsAlive;
         if (IsAlive != status) {
             IsAlive = !IsAlive;
             generation = 1;
-        } else {
+            if(!IsAlive)
+            {
+                 generation = 0;
+            }
+        } else if(IsAlive == true) {
             generation++;
         }
     }
@@ -157,5 +162,12 @@ public class Cel {
 
         }
 
+    }
+
+    boolean getIsAlive() {
+    return IsAlive;
+    }
+      boolean getLastStatus() {
+    return LastStatus;
     }
 }
