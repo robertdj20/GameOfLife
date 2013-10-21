@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
@@ -25,6 +26,8 @@ public class MainWindow extends javax.swing.JFrame {
 GameView g ;
    Timer t;
     JButton startBtn;
+            JComboBox comboBox ;
+    String selectedVorm;
     /**
      * Creates new form MainWindow
      */
@@ -42,7 +45,7 @@ GameView g ;
        t = new Timer(2000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        controller.DoeBeurt();
+                        controller.DoeBeurt(selectedVorm);
                         g.repaint();
                     }
                 });
@@ -64,6 +67,21 @@ GameView g ;
           }
             }
         });
+         comboBox = new JComboBox();
+        selectedVorm= "Oasis";
+        comboBox.addItem("Oasis");
+        comboBox.addItem("Cilinder");
+        comboBox.addItem("Torus");
+         comboBox.addItem("Möbius ring");
+        comboBox.addItem("Klein Fles");
+        comboBox.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               selectedVorm = comboBox.getSelectedItem().toString();
+            }
+        });
+        topBar.add(comboBox);
         topBar.add(startBtn);
         mainPanel.add(topBar);
         mainPanel.add(scroll);

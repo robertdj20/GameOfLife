@@ -37,8 +37,8 @@ public class Controller {
       return game;
     }
 
-    public void DoeBeurt() {
-       game.DoeBeurt();
+    public void DoeBeurt(    String selectedVorm) {
+       game.DoeBeurt(     selectedVorm);
 
 
     }

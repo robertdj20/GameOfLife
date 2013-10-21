@@ -18,7 +18,8 @@ import java.awt.geom.Rectangle2D;
 public class Cel {
 
     int generation = 0;
-    boolean LastStatus =false;
+    boolean LastStatus = false;
+
     public Cel() {
         IsAlive = false;
     }
@@ -31,11 +32,10 @@ public class Cel {
         if (IsAlive != status) {
             IsAlive = !IsAlive;
             generation = 1;
-            if(!IsAlive)
-            {
-                 generation = 0;
+            if (!IsAlive) {
+                generation = 0;
             }
-        } else if(IsAlive == true) {
+        } else if (IsAlive == true) {
             generation++;
         }
     }
@@ -65,15 +65,16 @@ public class Cel {
                     (y) * Controller.celHeight);
             image.drawLine(x * Controller.celWidth, (y + 1) * Controller.celHeight, (x + 1) * Controller.celWidth,
                     (y + 1) * Controller.celHeight);
-            image.drawString(Integer.toString(generation), (x * Controller.celWidth) + Controller.celWidth / 2, (y * Controller.celHeight) + Controller.celHeight / 2);
-
+            if (generation != 0) {
+                image.drawString(Integer.toString(generation), (x * Controller.celWidth) + Controller.celWidth / 2, (y * Controller.celHeight) + Controller.celHeight / 2);
+            }
 
         } else if (cellType == 1) {
             Point p1 = new Point();
             Point p2;
             Point p3;
-            int letterX= (x * Controller.celWidth);
-            int letterY= (y * Controller.celHeight)- ((y / 2) * Controller.celHeight) +(Controller.celHeight/2);
+            int letterX = (x * Controller.celWidth);
+            int letterY = (y * Controller.celHeight) - ((y / 2) * Controller.celHeight) + (Controller.celHeight / 2);
 
             if (y % 2 == 0) {
                 p1 = new Point((x * Controller.celWidth),
@@ -82,8 +83,8 @@ public class Cel {
                         (y * (Controller.celHeight)));
                 p3 = new Point(((x * Controller.celWidth)),
                         ((y + 1) * (Controller.celHeight)));
-                letterX +=Controller.celWidth/4;
-         
+                letterX += Controller.celWidth / 4;
+
             } else {
                 p1 = new Point(((x - 1) * Controller.celWidth),
                         ((y + 1) * Controller.celHeight) - (Controller.celHeight));
@@ -91,14 +92,14 @@ public class Cel {
                         (y * (Controller.celHeight) - (Controller.celHeight)));
                 p3 = new Point(((x * Controller.celWidth)),
                         ((y + 1) * Controller.celHeight) - (Controller.celHeight));
-               letterX -=Controller.celWidth/2;
-                letterY -=Controller.celHeight - (Controller.celHeight/2.5f);
+                letterX -= Controller.celWidth / 2;
+                letterY -= Controller.celHeight - (Controller.celHeight / 2.5f);
             }
 
 
 
 
-          
+
 
 
             int[] xcor = {p1.x, p2.x, p3.x};
@@ -110,7 +111,9 @@ public class Cel {
             image.fill(triangle);
             image.setColor(Color.BLACK);
             image.draw(triangle);
-             image.drawString(Integer.toString(generation), letterX, letterY);
+            if (generation != 0) {
+                image.drawString(Integer.toString(generation), letterX, letterY);
+            }
 
 
         } else if (cellType == 2) {
@@ -157,17 +160,18 @@ public class Cel {
             image.fill(hexagon);
             image.setColor(Color.BLACK);
             image.draw(hexagon);
-
-            image.drawString(Integer.toString(generation), (x * Controller.celWidth) + (Controller.celWidth / 2), letterY);
-
+            if (generation != 0) {
+                image.drawString(Integer.toString(generation), (x * Controller.celWidth) + (Controller.celWidth / 2), letterY);
+            }
         }
 
     }
 
     boolean getIsAlive() {
-    return IsAlive;
+        return IsAlive;
     }
-      boolean getLastStatus() {
-    return LastStatus;
+
+    boolean getLastStatus() {
+        return LastStatus;
     }
 }

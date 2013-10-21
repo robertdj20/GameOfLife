@@ -17,7 +17,7 @@ public abstract class IGame {
     Cel Cellen[][];
    int Width ,Height;
         protected int celType;
-        public abstract List<Cel> GetBuren(int x, int y);
+        public abstract List<Cel> GetBuren(int x, int y,  String selectedVorm);
     public void CreateGame(int width, int height) {
         this.Width = width;
         this.Height = height;
@@ -49,7 +49,7 @@ public abstract class IGame {
 
    abstract void GebruikerClicked(int x, int y);
 
-   abstract void DoeBeurt();
+   abstract void DoeBeurt(    String selectedVorm);
       
 
 

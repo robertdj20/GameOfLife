@@ -18,7 +18,7 @@ public class HexagonGame extends IGame{
     }
 
     @Override
-    public List<Cel> GetBuren(int x, int y) {
+    public List<Cel> GetBuren(int x, int y,  String selectedVorm) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -28,7 +28,7 @@ public class HexagonGame extends IGame{
     }
 
     @Override
-    void DoeBeurt() {
+    void DoeBeurt(    String selectedVorm) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
