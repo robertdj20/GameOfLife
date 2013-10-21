@@ -26,6 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
 GameView g ;
    Timer t;
     JButton startBtn;
+    JButton selectFigurBtn;
             JComboBox comboBox ;
     String selectedVorm;
     /**
@@ -58,11 +59,13 @@ GameView g ;
           if(!t.isRunning())
           {
                            t.start();
+                           selectFigurBtn.setEnabled(false);
                            startBtn.setText("Stop");
           }
           else
           {
               t.stop();
+                 selectFigurBtn.setEnabled(true);
                   startBtn.setText("Start");
           }
             }
@@ -74,7 +77,19 @@ GameView g ;
         comboBox.addItem("Torus");
          comboBox.addItem("Möbius ring");
         comboBox.addItem("Klein Fles");
+        selectFigurBtn = new JButton("Selecteer gedeelte");
+        selectFigurBtn.addActionListener(new ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               g.selectingFigure=true;
+            }
+        });
+        
+        
         comboBox.addActionListener(new ActionListener(){
+
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,6 +98,7 @@ GameView g ;
         });
         topBar.add(comboBox);
         topBar.add(startBtn);
+        topBar.add(selectFigurBtn);
         mainPanel.add(topBar);
         mainPanel.add(scroll);
         setContentPane(mainPanel);

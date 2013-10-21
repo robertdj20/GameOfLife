@@ -5,6 +5,7 @@
 package gameoflife;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,10 @@ public abstract class IGame {
    int Width ,Height;
         protected int celType;
         public abstract List<Cel> GetBuren(int x, int y,  String selectedVorm);
+        Point selectionp1;
+            Point selectionp2;
+        
+        
     public void CreateGame(int width, int height) {
         this.Width = width;
         this.Height = height;
@@ -50,7 +55,8 @@ public abstract class IGame {
    abstract void GebruikerClicked(int x, int y);
 
    abstract void DoeBeurt(    String selectedVorm);
-      
+
+   abstract void setSelection(int x, int y, boolean[][] selectionCells);
 
 
 }

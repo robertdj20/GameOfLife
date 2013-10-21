@@ -30,4 +30,9 @@ public class TriangleGame extends IGame {
     void DoeBeurt(    String selectedVorm) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    void setSelection(int x, int y, boolean[][] selectionCells) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

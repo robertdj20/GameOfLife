@@ -242,8 +242,8 @@ public class RectangleGame extends IGame {
     private ArrayList<Cel> GetKlein(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<Cel>();
         _temp.addAll(GetMobius(x, y));
-        x= this.Width-1-x;
-     if (y == 0) {
+        x = this.Width - 1 - x;
+        if (y == 0) {
             int index = this.Height - 1;
             _temp.add(Cellen[x][index]);
             if (x != 0) {
@@ -271,5 +271,21 @@ public class RectangleGame extends IGame {
         }
 
         return _temp;
+    }
+
+    @Override
+    void setSelection(int x, int y, boolean[][] selectionCells) {
+        int celX = x / Controller.celWidth;
+        int celY = y / Controller.celHeight;
+        int startCelY = celY ;//- (selectionCells.length / 2);
+        int startCelX = celX ;//- (selectionCells[0].length / 2);
+        if (startCelY >= 0 && startCelX >= 0) {
+            for (int i = 0; i < selectionCells.length; i++) {
+                for (int c = 0; c < selectionCells[i].length; c++) {
+                    Cellen[startCelX + i][startCelY + c].SetCelStatus(selectionCells[i][c]);
+                }
+            }
+        }
+
     }
 }
