@@ -4,6 +4,7 @@
  */
 package gameoflife;
 
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -109,7 +110,7 @@ public class RectangleGame extends IGame {
 
         return _temp;
     }
-
+ 
     @Override
     void GebruikerClicked(int x, int y) {
         int celX = x / Controller.celWidth;
@@ -220,8 +221,10 @@ public class RectangleGame extends IGame {
         y = this.Height - 1 - y;
         if (x == 0) {
             _temp.add(Cellen[this.Width - 1][y]);
+            
             if (y != 0) {
                 _temp.add(Cellen[this.Width - 1][y - 1]);
+       
             }
             if (y != this.Height - 1) {
                 _temp.add(Cellen[this.Width - 1][y + 1]);

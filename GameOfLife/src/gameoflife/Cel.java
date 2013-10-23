@@ -71,49 +71,79 @@ public class Cel {
 
         } else if (cellType == 1) {
             Point p1 = new Point();
-            Point p2;
-            Point p3;
-            int letterX = (x * Controller.celWidth);
-            int letterY = (y * Controller.celHeight) - ((y / 2) * Controller.celHeight) + (Controller.celHeight / 2);
+            Point p2 = new Point();
+            Point p3 = new Point();
 
-            if (y % 2 == 0) {
-                p1 = new Point((x * Controller.celWidth),
-                        (y * (Controller.celHeight)));
-                p2 = new Point((x + 1) * Controller.celWidth,
-                        (y * (Controller.celHeight)));
-                p3 = new Point(((x * Controller.celWidth)),
-                        ((y + 1) * (Controller.celHeight)));
-                letterX += Controller.celWidth / 4;
-
+            if (x % 2 == 0) {
+                p1 = new Point((x * Controller.celWidth), (y * Controller.celHeight));
+                p2 = new Point(((x + 1) * Controller.celWidth), (y * Controller.celHeight));
+                p3 = new Point((((x + 1) * Controller.celWidth) - (Controller.celWidth / 2)), ((y + 1) * Controller.celHeight));
             } else {
-                p1 = new Point(((x - 1) * Controller.celWidth),
-                        ((y + 1) * Controller.celHeight) - (Controller.celHeight));
-                p2 = new Point((x) * Controller.celWidth,
-                        (y * (Controller.celHeight) - (Controller.celHeight)));
-                p3 = new Point(((x * Controller.celWidth)),
-                        ((y + 1) * Controller.celHeight) - (Controller.celHeight));
-                letterX -= Controller.celWidth / 2;
-                letterY -= Controller.celHeight - (Controller.celHeight / 2.5f);
+                p1 = new Point((x * Controller.celWidth), ((y + 1) * Controller.celHeight));
+                p2 = new Point(((x + 1) * Controller.celWidth), ((y + 1) * Controller.celHeight));
+                p3 = new Point((((x + 1) * Controller.celWidth) - (Controller.celWidth / 2)), ((y) * Controller.celHeight));
             }
+            int halfeCelwidth = x * (Controller.celWidth / 2);
+            int[] xcor = {p1.x - halfeCelwidth, p2.x - halfeCelwidth, p3.x - halfeCelwidth};
 
-
-
-
-
-
-
-            int[] xcor = {p1.x, p2.x, p3.x};
-
-            int[] ycor = {p1.y - ((y / 2) * Controller.celHeight), p2.y - ((y / 2) * Controller.celHeight), p3.y - ((y / 2) * Controller.celHeight)};
+            int[] ycor = {p1.y, p2.y, p3.y};
 
             Polygon triangle = new Polygon(xcor, ycor, xcor.length);
 
             image.fill(triangle);
             image.setColor(Color.BLACK);
             image.draw(triangle);
-            if (generation != 0) {
-                image.drawString(Integer.toString(generation), letterX, letterY);
+
+              if (generation != 0) {
+            int letterX = (x * Controller.celWidth) - halfeCelwidth + (Controller.celWidth /3);
+            int letterY = (y * Controller.celHeight) + (Controller.celHeight / 2);
+            if (x % 2 != 0) {
+                letterY+= (Controller.celHeight / 4);
             }
+                    image.drawString(Integer.toString(generation), letterX, letterY);
+          
+             }
+          /*  int letterX = (x * Controller.celWidth);
+             int letterY = (y * Controller.celHeight) - ((y / 2) * Controller.celHeight) + (Controller.celHeight / 2);
+
+             if (y % 2 == 0) {
+             p1 = new Point((x * Controller.celWidth),
+             (y * (Controller.celHeight)));
+             p2 = new Point((x + 1) * Controller.celWidth,
+             (y * (Controller.celHeight)));
+             p3 = new Point(((x * Controller.celWidth)),
+             ((y + 1) * (Controller.celHeight)));
+             letterX += Controller.celWidth / 4;
+
+             } else {
+             p1 = new Point(((x - 1) * Controller.celWidth),
+             ((y + 1) * Controller.celHeight) - (Controller.celHeight));
+             p2 = new Point((x) * Controller.celWidth,
+             (y * (Controller.celHeight) - (Controller.celHeight)));
+             p3 = new Point(((x * Controller.celWidth)),
+             ((y + 1) * Controller.celHeight) - (Controller.celHeight));
+             letterX -= Controller.celWidth / 2;
+             letterY -= Controller.celHeight - (Controller.celHeight / 2.5f);
+             }
+
+
+
+
+
+
+
+             int[] xcor = {p1.x, p2.x, p3.x};
+
+             int[] ycor = {p1.y - ((y / 2) * Controller.celHeight), p2.y - ((y / 2) * Controller.celHeight), p3.y - ((y / 2) * Controller.celHeight)};
+
+             Polygon triangle = new Polygon(xcor, ycor, xcor.length);
+
+             image.fill(triangle);
+             image.setColor(Color.BLACK);
+             image.draw(triangle);
+             if (generation != 0) {
+             image.drawString(Integer.toString(generation), letterX, letterY);
+             }*/
 
 
         } else if (cellType == 2) {
@@ -163,6 +193,7 @@ public class Cel {
             if (generation != 0) {
                 image.drawString(Integer.toString(generation), (x * Controller.celWidth) + (Controller.celWidth / 2), letterY);
             }
+            image.drawString(x + "," + y, (x * Controller.celWidth) + (Controller.celWidth / 2), letterY);
         }
 
     }

@@ -34,7 +34,7 @@ public class GameView extends JPanel {
     public GameView(Controller c) {
         controller = c;
         game = c.GetGame();
-        this.setPreferredSize(new Dimension(100 * Controller.celWidth, 100 * Controller.celHeight));
+        this.setPreferredSize(new Dimension((100 * Controller.celWidth)+150, (100 * Controller.celHeight)+150));
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (!selectingFigure) {

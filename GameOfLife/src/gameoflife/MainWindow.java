@@ -35,7 +35,7 @@ GameView g ;
     public MainWindow() {
         initComponents();
         controller = new Controller();
-        controller.newGame(100, 100, new RectangleGame());
+        controller.newGame(50, 50, new HexagonGame());
         //       setContentPane(new GameView());
          g = new GameView(controller);
         JScrollPane scroll = new JScrollPane(g);
