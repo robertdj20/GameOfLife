@@ -4,14 +4,17 @@
  */
 package gameoflife;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.Timer;
@@ -23,79 +26,85 @@ import javax.swing.Timer;
 public class MainWindow extends javax.swing.JFrame {
 
     Controller controller;
-GameView g ;
-   Timer t;
+    GameView g;
+    Timer t;
     JButton startBtn;
     JButton selectFigurBtn;
-            JComboBox comboBox ;
+    JButton newBtn;
+    JComboBox comboBox;
     String selectedVorm;
+    JPanel mainPanel;
+    JScrollPane scroll;
+
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
         controller = new Controller();
-        controller.newGame(50, 50, new HexagonGame());
+        controller.newGame(10, 10, new HexagonGame());
         //       setContentPane(new GameView());
-         g = new GameView(controller);
-        JScrollPane scroll = new JScrollPane(g);
+        g = new GameView(controller);
+        scroll = new JScrollPane(g);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         //this.add(scroll);
-        JPanel mainPanel = new JPanel(new FlowLayout());
+        mainPanel = new JPanel(new FlowLayout());
 
-       t = new Timer(2000, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        controller.DoeBeurt(selectedVorm);
-                        g.repaint();
-                    }
-                });
-        
+        t = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.DoeBeurt(selectedVorm);
+                g.repaint();
+            }
+        });
+
         JPanel topBar = new JPanel();
-         startBtn = new JButton("Start");
+        startBtn = new JButton("Start");
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-          if(!t.isRunning())
-          {
-                           t.start();
-                           selectFigurBtn.setEnabled(false);
-                           startBtn.setText("Stop");
-          }
-          else
-          {
-              t.stop();
-                 selectFigurBtn.setEnabled(true);
-                  startBtn.setText("Start");
-          }
+                if (!t.isRunning()) {
+                    t.start();
+                    selectFigurBtn.setEnabled(false);
+                    startBtn.setText("Stop");
+                } else {
+                    t.stop();
+                    selectFigurBtn.setEnabled(true);
+                    startBtn.setText("Start");
+                }
             }
         });
-         comboBox = new JComboBox();
-        selectedVorm= "Oasis";
+        newBtn = new JButton("New game");
+        newBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CreateNewGame();
+            }
+        });
+        comboBox = new JComboBox();
+        selectedVorm = "Oasis";
         comboBox.addItem("Oasis");
         comboBox.addItem("Cilinder");
         comboBox.addItem("Torus");
-         comboBox.addItem("Möbius ring");
+        comboBox.addItem("Möbius ring");
         comboBox.addItem("Klein Fles");
         selectFigurBtn = new JButton("Selecteer gedeelte");
-        selectFigurBtn.addActionListener(new ActionListener()
-        {
-
+        selectFigurBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               g.selectingFigure=true;
+                g.selectingFigure = true;
             }
         });
-        
-        
-        comboBox.addActionListener(new ActionListener(){
 
 
+        comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               selectedVorm = comboBox.getSelectedItem().toString();
+                selectedVorm = comboBox.getSelectedItem().toString();
             }
         });
+        topBar.add(newBtn);
+
         topBar.add(comboBox);
         topBar.add(startBtn);
         topBar.add(selectFigurBtn);
@@ -104,6 +113,57 @@ GameView g ;
         setContentPane(mainPanel);
         setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
+    }
+
+    void CreateNewGame() {
+        ArrayList<String> _temp = new ArrayList<String>();
+        for (int number = 25; number <= 200; number += 25) {
+            _temp.add(number + " x" + number);
+        }
+        String heightWidth = (String) JOptionPane.showInputDialog(
+                this, null,
+                "Hooghte en Breedte",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                _temp.toArray(),
+                _temp.get(0));
+
+        String[] options = new String[]{"Rectangle", "Triangle", "Hexagon"};
+        String Kind = (String) JOptionPane.showInputDialog(
+                this, null,
+                "Soort",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                options,
+                "Rectangle");
+        IGame _tempGame;
+        switch (Kind) {
+            case "Rectangle":
+                _tempGame = new RectangleGame();
+                break;
+            case "Triangle":
+                _tempGame = new TriangleGame();
+                break;
+            case "Hexagon":
+                _tempGame = new HexagonGame();
+                break;
+            default:
+                _tempGame = new RectangleGame();
+                break;
+        }
+        String number = heightWidth.substring(0, 3);
+        number = number.trim();
+        int heightWithNumber = Integer.parseInt(number);
+        controller = new Controller();
+        controller.newGame(heightWithNumber, heightWithNumber, _tempGame);
+        //       setContentPane(new GameView());
+        g = new GameView(controller);
+                g.setPreferredSize(new Dimension((heightWithNumber * Controller.celWidth)+150, (heightWithNumber * Controller.celHeight)+150));
+        mainPanel.remove(scroll);
+        scroll = new JScrollPane(g);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        mainPanel.add(scroll);
+        g.repaint();
     }
 
     /**
