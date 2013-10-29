@@ -93,16 +93,17 @@ public class Cel {
             image.fill(triangle);
             image.setColor(Color.BLACK);
             image.draw(triangle);
-
-              if (generation != 0) {
-            int letterX = (x * Controller.celWidth) - halfeCelwidth + (Controller.celWidth /3);
+  int letterX = (x * Controller.celWidth) - halfeCelwidth + (Controller.celWidth /3);
             int letterY = (y * Controller.celHeight) + (Controller.celHeight / 2);
+              if (generation != 0) {
+          
             if (x % 2 != 0) {
                 letterY+= (Controller.celHeight / 4);
             }
                     image.drawString(Integer.toString(generation), letterX, letterY);
           
              }
+              image.drawString(x+","+y, letterX, letterY);
           /*  int letterX = (x * Controller.celWidth);
              int letterY = (y * Controller.celHeight) - ((y / 2) * Controller.celHeight) + (Controller.celHeight / 2);
 
@@ -193,7 +194,7 @@ public class Cel {
             if (generation != 0) {
                 image.drawString(Integer.toString(generation), (x * Controller.celWidth) + (Controller.celWidth / 2), letterY);
             }
-            image.drawString(x + "," + y, (x * Controller.celWidth) + (Controller.celWidth / 2), letterY);
+      
         }
 
     }

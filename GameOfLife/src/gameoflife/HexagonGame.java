@@ -243,7 +243,7 @@ public class HexagonGame extends IGame {
 
         } else if (y == this.Height - 1) {
             _temp.add(Cellen[x][0]);
-            if (x % 2 != 0) {
+            if (x % 2 == 0) {
                 if (x != 0) {
                     _temp.add(Cellen[x - 1][0]);
                 }
@@ -265,18 +265,13 @@ public class HexagonGame extends IGame {
             if (y != 0) {
                 _temp.add(Cellen[this.Width - 1][y - 1]);
             }
-            if (y != this.Height - 1) {
-                _temp.add(Cellen[this.Width - 1][y + 1]);
-            }
         } else if (x == this.Width - 1) {
 
             _temp.add(Cellen[0][y]);
             if (y != 0) {
                 _temp.add(Cellen[0][y - 1]);
             }
-            if (y != this.Height - 1) {
-                _temp.add(Cellen[0][y + 1]);
-            }
+
         }
         return _temp;
     }
@@ -288,27 +283,31 @@ public class HexagonGame extends IGame {
         if (y == 0) {
             int index = this.Height - 1;
             _temp.add(Cellen[x][index]);
-            if (x != 0) {
-                _temp.add(Cellen[x - 1][index]);
-            } else {
-                _temp.add(Cellen[this.Width - 1][index]);
-            }
-            if (x != this.Width - 1) {
-                _temp.add(Cellen[x + 1][index]);
-            } else {
-                _temp.add(Cellen[0][index]);
+            if (x % 2 != 0) {
+                if (x != 0) {
+                    _temp.add(Cellen[x - 1][index]);
+                } else {
+                    _temp.add(Cellen[this.Width - 1][index]);
+                }
+                if (x != this.Width - 1) {
+                    _temp.add(Cellen[x + 1][index]);
+                } else {
+                    _temp.add(Cellen[0][index]);
+                }
             }
         } else if (y == this.Height - 1) {
             _temp.add(Cellen[x][0]);
-            if (x != 0) {
-                _temp.add(Cellen[x - 1][0]);
-            } else {
-                _temp.add(Cellen[this.Width - 1][0]);
-            }
-            if (x != this.Width - 1) {
-                _temp.add(Cellen[x + 1][0]);
-            } else {
-                _temp.add(Cellen[0][0]);
+            if (x % 2 == 0) {
+                if (x != 0) {
+                    _temp.add(Cellen[x - 1][0]);
+                } else {
+                    _temp.add(Cellen[this.Width - 1][0]);
+                }
+                if (x != this.Width - 1) {
+                    _temp.add(Cellen[x + 1][0]);
+                } else {
+                    _temp.add(Cellen[0][0]);
+                }
             }
         }
         return _temp;
