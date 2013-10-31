@@ -42,7 +42,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         controller = new Controller();
-        controller.newGame(10, 10, new HexagonGame());
+        controller.newGame(10, 10, new TriangleGame());
         //       setContentPane(new GameView());
         g = new GameView(controller);
         scroll = new JScrollPane(g);
