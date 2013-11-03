@@ -50,7 +50,7 @@ public class MainWindow extends javax.swing.JFrame {
         //this.add(scroll);
         mainPanel = new JPanel(new FlowLayout());
 
-        t = new Timer(2000, new ActionListener() {
+        t = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.DoeBeurt(selectedVorm);

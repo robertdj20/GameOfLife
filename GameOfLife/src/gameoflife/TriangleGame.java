@@ -78,17 +78,68 @@ public class TriangleGame extends IGame {
     public List<Cel> GetCilinder(int x, int y) {
         List<Cel> result = new ArrayList<>();
 
+        try {
+            if (x == 0 && this.Width - 1 % 2 != 0) {
+                result.add(Cellen[this.Width - 1][y]);
+                result.add(Cellen[this.Width - 1][y - 1]);
+
+            } else if (x == this.Width - 1 && x % 2 != 0) {
+                result.add(Cellen[0][y]);
+                result.add(Cellen[0][y + 1]);
+            }
+
+        } catch (Exception e) {
+            //Een van de cellen bestond niet.
+        }
+
         return result;
     }
 
     public List<Cel> GetTorus(int x, int y) {
         List<Cel> result = new ArrayList<>();
 
+        result.addAll(this.GetCilinder(x, y));
+
+        try {
+
+            if (y == 0) {
+                result.add(Cellen[x][this.Height - 1]);
+                if (x % 2 == 0) {
+                    result.add(Cellen[x - 1][this.Height - 1]);
+                    result.add(Cellen[x + 1][this.Height - 1]);
+                }
+            } else if (y == this.Height - 1) {
+                result.add(Cellen[x][0]);
+                if (x % 2 != 0) {
+                    result.add(Cellen[x - 1][0]);
+                    result.add(Cellen[x + 1][0]);
+                }
+            }
+        } catch (Exception e) {
+            //niks aan de hand
+        }
+
         return result;
     }
 
     public List<Cel> GetMobius(int x, int y) {
         List<Cel> result = new ArrayList<>();
+
+        try {
+            if (y == 0) {
+                int X = (this.Width - 1) - x;
+                result.add(Cellen[X][this.Height - 1]);
+                result.add(Cellen[X + 1][this.Height - 1]);
+                result.add(Cellen[X - 1][this.Height - 1]);
+            } else if (y == this.Height - 1) {
+                int X = (this.Width - 1) - x;
+                result.add(Cellen[X][0]);
+                result.add(Cellen[X + 1][0]);
+                result.add(Cellen[X - 1][0]);
+            }
+        } catch (Exception e) {
+            //Index bestond niet.
+        }
 
         return result;
     }
@@ -101,10 +152,16 @@ public class TriangleGame extends IGame {
 
     @Override
     void GebruikerClicked(int x, int y) {
-        int celX = x / Controller.celWidth;
-        int celY = y / Controller.celHeight;
+        //System.out.println("x: " +x +" y: " +y);
+        int celX = Math.round(x / Controller.celWidth);
+        int celY = Math.round(y / Controller.celHeight);
+
+        //System.out.println("x: " +celX +" y: " +celY);
+        //celX = Math.round(celX / 2);
+        celX *= 2;
         celY -= 3;
-        celX += 2;
+
+        //System.out.println("x: " +celX +" y: " +celY +"\n\n");
         try {
             Cellen[celX][celY].SetCelStatus(true);
         } catch (Exception e) {
@@ -134,7 +191,6 @@ public class TriangleGame extends IGame {
                 }
                 Cel currentCel = this.Cellen[x][y];
                 _had.add(currentCel);
-//e 3,5/2
                 if (currentCel.getIsAlive() == false) {
                     if (liveCounter == 2) {
                         currentCel.SetCelStatus(true);
