@@ -37,7 +37,7 @@ public class TriangleGame extends IGame {
             result.add(Cellen[x][y - 1]); //Boven
             result.add(Cellen[x][y + 1]); //Onder
         } catch (Exception e) {
-            //Exception gevangen. Maakt niets, index bestond niet ofzo
+            
         }
 
         if (x % 2 == 0) {
@@ -45,14 +45,14 @@ public class TriangleGame extends IGame {
                 result.add(Cellen[x - 1][y - 1]); //LinksBoven
                 result.add(Cellen[x + 1][y - 1]); //RechtsBoven
             } catch (Exception e) {
-                //Exception gevangen. Maakt niets, index bestond niet ofzo
+                
             }
         } else {
             try {
                 result.add(Cellen[x - 1][y + 1]); //LinksOnder
                 result.add(Cellen[x + 1][y + 1]); //RechtsOnder
             } catch (Exception e) {
-                //Exception gevangen. Maakt niets, index bestond niet ofzo
+                
             }
         }
 
@@ -89,7 +89,7 @@ public class TriangleGame extends IGame {
             }
 
         } catch (Exception e) {
-            //Een van de cellen bestond niet.
+            
         }
 
         return result;
@@ -116,7 +116,7 @@ public class TriangleGame extends IGame {
                 }
             }
         } catch (Exception e) {
-            //niks aan de hand
+            
         }
 
         return result;
@@ -138,7 +138,7 @@ public class TriangleGame extends IGame {
                 result.add(Cellen[X - 1][0]);
             }
         } catch (Exception e) {
-            //Index bestond niet.
+            
         }
 
         return result;
@@ -147,6 +147,28 @@ public class TriangleGame extends IGame {
     public List<Cel> GetKlein(int x, int y) {
         List<Cel> result = new ArrayList<>();
 
+        result.addAll(this.GetMobius(x, y));
+        
+        try{
+            if(x == 0){
+                int Y = (this.Height -1) - y;
+                if(this.Width -1 % 2 != 0){
+                    result.add(Cellen[this.Width -1][Y]);
+                    result.add(Cellen[this.Width -1][Y +1]);
+                }
+            }
+            else if(x == this.Width -1){
+                int Y = (this.Height -1) - y;
+                if(this.Width -1 % 2 != 0){
+                    result.add(Cellen[0][Y]);
+                    result.add(Cellen[0][Y - 1]);
+                }
+            }
+        }
+        catch(Exception e){
+            
+        }
+        
         return result;
     }
 
