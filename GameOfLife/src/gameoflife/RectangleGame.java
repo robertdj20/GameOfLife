@@ -19,6 +19,7 @@ public class RectangleGame extends IGame {
         celType = 0;
     }
 
+    //Buren ophalen
     public List<Cel> GetBuren(int x, int y, String selectedVorm) {
 
         List<Cel> _temp = new ArrayList<Cel>();
@@ -82,6 +83,7 @@ public class RectangleGame extends IGame {
                 _temp.add(Cellen[x + 1][y - 1]);//rechtsonder
                 _temp.add(Cellen[x - 1][y - 1]);//linksonder
             }
+            //Aan de hand van de gekozen vorm andere buren ophalen
             if (selectedVorm != "Oasis") {
                 /*
                  *         comboBox.addItem("Oasis");
@@ -110,12 +112,20 @@ public class RectangleGame extends IGame {
 
         return _temp;
     }
- 
+
+    //Gebruiker cel kunnen laten instellen
     @Override
     void GebruikerClicked(int x, int y) {
-        int celX = x / Controller.celWidth;
-        int celY = y / Controller.celHeight;
-        Cellen[celX][celY].SetCelStatus(true);
+        try {
+            int celX = x / Controller.celWidth;
+            int celY = y / Controller.celHeight;
+            if (Cellen[celX][celY].getIsAlive()) {
+                Cellen[celX][celY].SetCelStatus(false);
+            } else {
+                Cellen[celX][celY].SetCelStatus(true);
+            }
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -160,6 +170,7 @@ public class RectangleGame extends IGame {
         }
     }
 
+    //Buren cilinder 
     private ArrayList<Cel> GeClininderBuren(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<Cel>();
         if (x == 0) {
@@ -182,6 +193,7 @@ public class RectangleGame extends IGame {
         }
         return _temp;
     }
+//buren torus
 
     private ArrayList<Cel> GetTorus(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<Cel>();
@@ -221,10 +233,10 @@ public class RectangleGame extends IGame {
         y = this.Height - 1 - y;
         if (x == 0) {
             _temp.add(Cellen[this.Width - 1][y]);
-            
+
             if (y != 0) {
                 _temp.add(Cellen[this.Width - 1][y - 1]);
-       
+
             }
             if (y != this.Height - 1) {
                 _temp.add(Cellen[this.Width - 1][y + 1]);
@@ -241,6 +253,7 @@ public class RectangleGame extends IGame {
         }
         return _temp;
     }
+    //buren klein
 
     private ArrayList<Cel> GetKlein(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<Cel>();
@@ -276,12 +289,13 @@ public class RectangleGame extends IGame {
         return _temp;
     }
 
+    //selectie kopieeren
     @Override
     void setSelection(int x, int y, boolean[][] selectionCells) {
         int celX = x / Controller.celWidth;
         int celY = y / Controller.celHeight;
-        int startCelY = celY ;//- (selectionCells.length / 2);
-        int startCelX = celX ;//- (selectionCells[0].length / 2);
+        int startCelY = celY;//- (selectionCells.length / 2);
+        int startCelX = celX;//- (selectionCells[0].length / 2);
         if (startCelY >= 0 && startCelX >= 0) {
             for (int i = 0; i < selectionCells.length; i++) {
                 for (int c = 0; c < selectionCells[i].length; c++) {

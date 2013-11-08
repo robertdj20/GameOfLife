@@ -19,6 +19,7 @@ public class HexagonGame extends IGame {
         celType = 2;
     }
 
+    //Buren ophalen
     @Override
     public List<Cel> GetBuren(int x, int y, String selectedVorm) {
         List<Cel> _temp = new ArrayList<Cel>();
@@ -120,6 +121,7 @@ public class HexagonGame extends IGame {
         return _temp;
     }
 
+    //spel tekeken
     @Override
     void DrawGame(Graphics2D image) {
         for (int x = 0; x < Width; x++) {
@@ -129,6 +131,7 @@ public class HexagonGame extends IGame {
         }
     }
 
+    //Gebruiker cel levend of dood laten maken
     @Override
     void GebruikerClicked(int x, int y) {
         int celX = x / Controller.celWidth;
@@ -143,6 +146,7 @@ public class HexagonGame extends IGame {
         }
     }
 
+    //beurt doen Selected vorm is de door de gebruiker geselecteerde game
     @Override
     void DoeBeurt(String selectedVorm) {
         ArrayList<Cel> _had = new ArrayList<Cel>();
@@ -164,7 +168,7 @@ public class HexagonGame extends IGame {
                 }
                 Cel currentCel = this.Cellen[x][y];
                 _had.add(currentCel);
-//e 3,5/2
+                //regels: 3,5/2
                 if (currentCel.getIsAlive() == false) {
                     if (liveCounter == 2) {
                         currentCel.SetCelStatus(true);
@@ -185,6 +189,7 @@ public class HexagonGame extends IGame {
         }
     }
 
+    //Selectie kopieeren
     @Override
     void setSelection(int x, int y, boolean[][] selectionCells) {
         int celX = x / Controller.celWidth;
@@ -202,6 +207,7 @@ public class HexagonGame extends IGame {
         }
     }
 
+    //cilinder buren ophalen
     private Collection<? extends Cel> GeCilinderBuren(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<Cel>();
         if (x == 0) {
@@ -226,6 +232,7 @@ public class HexagonGame extends IGame {
         return _temp;
     }
 
+    //torus buren ophalen
     private Collection<? extends Cel> GetTorus(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<Cel>();
         _temp.addAll(GeCilinderBuren(x, y));
@@ -257,6 +264,7 @@ public class HexagonGame extends IGame {
         return _temp;
     }
 
+    //mobius ophalen
     private Collection<? extends Cel> GetMobius(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<Cel>();
         y = this.Height - 1 - y;
@@ -276,6 +284,7 @@ public class HexagonGame extends IGame {
         return _temp;
     }
 
+    //klein buren ophalen
     private Collection<? extends Cel> GetKlein(int x, int y) {
         ArrayList<Cel> _temp = new ArrayList<>();
         _temp.addAll(GetMobius(x, y));

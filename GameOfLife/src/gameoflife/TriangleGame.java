@@ -175,12 +175,12 @@ public class TriangleGame extends IGame {
     @Override
     void GebruikerClicked(int x, int y) {
         //System.out.println("x: " +x +" y: " +y);
-        int celX = Math.round(x / Controller.celWidth);
+        int celX = Math.round(x / (Controller.celWidth/2));
         int celY = Math.round(y / Controller.celHeight);
 
         //System.out.println("x: " +celX +" y: " +celY);
         //celX = Math.round(celX / 2);
-        celX *= 2;
+       // celX *= 2;
         celY -= 3;
 
         //System.out.println("x: " +celX +" y: " +celY +"\n\n");
