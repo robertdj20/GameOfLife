@@ -27,6 +27,7 @@ public class Cel {
     final Color dead = Color.RED;
     final Color live = Color.GREEN;
 
+    //status cel veranderen
     public void SetCelStatus(boolean status) {
         LastStatus = IsAlive;
         if (IsAlive != status) {
@@ -40,6 +41,7 @@ public class Cel {
         }
     }
 
+    //cel tekeken
     void DrawCel(Graphics2D image, int x, int y, int cellType) {
         Font font = new Font("Serif", Font.PLAIN, 12);
         image.setFont(font);
@@ -103,48 +105,8 @@ public class Cel {
                     image.drawString(Integer.toString(generation), letterX, letterY);
           
              }
-              image.drawString(x+","+y, letterX, letterY);
-          /*  int letterX = (x * Controller.celWidth);
-             int letterY = (y * Controller.celHeight) - ((y / 2) * Controller.celHeight) + (Controller.celHeight / 2);
-
-             if (y % 2 == 0) {
-             p1 = new Point((x * Controller.celWidth),
-             (y * (Controller.celHeight)));
-             p2 = new Point((x + 1) * Controller.celWidth,
-             (y * (Controller.celHeight)));
-             p3 = new Point(((x * Controller.celWidth)),
-             ((y + 1) * (Controller.celHeight)));
-             letterX += Controller.celWidth / 4;
-
-             } else {
-             p1 = new Point(((x - 1) * Controller.celWidth),
-             ((y + 1) * Controller.celHeight) - (Controller.celHeight));
-             p2 = new Point((x) * Controller.celWidth,
-             (y * (Controller.celHeight) - (Controller.celHeight)));
-             p3 = new Point(((x * Controller.celWidth)),
-             ((y + 1) * Controller.celHeight) - (Controller.celHeight));
-             letterX -= Controller.celWidth / 2;
-             letterY -= Controller.celHeight - (Controller.celHeight / 2.5f);
-             }
-
-
-
-
-
-
-
-             int[] xcor = {p1.x, p2.x, p3.x};
-
-             int[] ycor = {p1.y - ((y / 2) * Controller.celHeight), p2.y - ((y / 2) * Controller.celHeight), p3.y - ((y / 2) * Controller.celHeight)};
-
-             Polygon triangle = new Polygon(xcor, ycor, xcor.length);
-
-             image.fill(triangle);
-             image.setColor(Color.BLACK);
-             image.draw(triangle);
-             if (generation != 0) {
-             image.drawString(Integer.toString(generation), letterX, letterY);
-             }*/
+        //      image.drawString(x+","+y, letterX, letterY);
+        
 
 
         } else if (cellType == 2) {
